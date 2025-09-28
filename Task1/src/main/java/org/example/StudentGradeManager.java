@@ -232,11 +232,10 @@ public class StudentGradeManager {
         System.out.printf("Overall Highest Grade: %.1f\n", overallHighestGrade);
         System.out.printf("Overall Lowest Grade: %.1f\n", overallLowestGrade);
 
-        // Grade distribution
         Map<Character, Long> gradeDistribution = studentsWithGrades.stream()
                 .collect(HashMap::new,
                         (map, student) -> map.merge(student.getLetterGrade(), 1L, Long::sum),
-                        (map1, map2) -> { map2.forEach((k, v) -> map1.merge(k, v, Long::sum)); return map1; });
+                        (map1, map2) -> map2.forEach((k, v) -> map1.merge(k, v, Long::sum)));
 
         System.out.println("\nGRADE DISTRIBUTION:");
         System.out.println("-".repeat(20));
